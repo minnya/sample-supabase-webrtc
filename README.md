@@ -4,13 +4,51 @@ Sample demo project for supabase and WebRTC
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+### Step1. Clone Repository
+Clone the repository to your local environment
+```shell
+git clone https://github.com/minnya/sample-supabase-webrtc.git
+```
 
-A few resources to get you started if this is your first Flutter project:
+### Step2. Go to sample_supabase_webrtc
+```shell
+cd sample_supabase_webrtc
+```
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### Step3. Get dependencies
+```shell
+flutter pub get
+```
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Step4. Update Supabase Server URL
+Go to `main.dart` file, update the supabase url if necessary.
+
+For further details about Supabase & Flutter, please refer to the official document from [here](https://pub.dev/packages/supabase_flutter)
+
+```dart
+// ...
+
+String baseUrl = "";
+String anonKey = "****"; // Replace here if necessary
+
+void main() async{
+  if(!kIsWeb && Platform.isAndroid){
+    baseUrl = "http://10.0.2.2:8000";
+  }else{
+    baseUrl = "http://localhost:8000"; // Replace here if necessary
+  }
+  await Supabase.initialize(
+    url: baseUrl,
+    anonKey: anonKey,
+  );
+  runApp(const MyApp());
+}
+
+// ...
+```
+
+### Step5. Run the sample app
+It's time to push the launch button.
+```shell
+flutter run
+```
