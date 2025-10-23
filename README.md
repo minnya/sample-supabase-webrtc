@@ -2,6 +2,10 @@
 
 Sample demo project for supabase and WebRTC
 
+## Demo
+
+Check out the [Live Demo](https://minnya.github.io/sample-supabase-webrtc) to see it in action.
+
 ## Premises
 - Launch Supabase on your local environment
 - Prepare tables `users` and `calls` on supabase accordingly to the following definition.
