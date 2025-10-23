@@ -60,31 +60,38 @@ class _UserListScreenState extends State<UserListScreen> {
                   );
                 }
                 List<UserModel> users = snapshot.data!;
-                return ListView.builder(
-                  itemCount: users.length,
-                  itemBuilder: (context, index) {
-                    final user = users[index];
-                    return Container(
-                      margin: const EdgeInsets.all(10),
-                      color: Theme
-                          .of(context)
-                          .colorScheme
-                          .primaryContainer,
-                      child: ListTile(
-                        title: Text(user.name),
-                        subtitle: Text(user.id),
-                        trailing: ElevatedButton(
-                          child: const Text("Call"),
-                          onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(
-                                builder: (context) =>
-                                    CallScreen(
-                                        callerId: widget.myUserModel.id, calleeId: user.id)));
-                          },
-                        ),
+                return Column(
+                  children: [
+                    Text("Only users created within the past 30 minutes are displayed here.",style: Theme.of(context).textTheme.bodyLarge,),
+                    Expanded(
+                      child: ListView.builder(
+                        itemCount: users.length,
+                        itemBuilder: (context, index) {
+                          final user = users[index];
+                          return Container(
+                            margin: const EdgeInsets.all(10),
+                            color: Theme
+                                .of(context)
+                                .colorScheme
+                                .primaryContainer,
+                            child: ListTile(
+                              title: Text(user.name),
+                              subtitle: Text(user.id),
+                              trailing: ElevatedButton(
+                                child: const Text("Call"),
+                                onPressed: () {
+                                  Navigator.push(context, MaterialPageRoute(
+                                      builder: (context) =>
+                                          CallScreen(
+                                              callerId: widget.myUserModel.id, calleeId: user.id)));
+                                },
+                              ),
+                            ),
+                          );
+                        },
                       ),
-                    );
-                  },
+                    ),
+                  ],
                 );
               }
           ),

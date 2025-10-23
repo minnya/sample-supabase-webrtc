@@ -35,8 +35,9 @@ class UserModel {
   }
 
   static Future<List<UserModel>> getAll({required String myId}) async{
+    final timeRange = DateTime.now().toUtc().subtract(const Duration(minutes: 30));
     List<Map<String, dynamic>> result =
-    await client.from("users").select().neq("id", myId);
+    await client.from("users").select().neq("id", myId).gte("created_at", timeRange.toIso8601String());
     return result.map((Map<String, dynamic> map) => UserModel.fromMap(map)).toList();
   }
 

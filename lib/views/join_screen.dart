@@ -11,10 +11,20 @@ class JoinScreen extends StatefulWidget {
 }
 
 class _JoinScreen extends State<JoinScreen> {
+  final TextEditingController controller = TextEditingController();
+  bool isButtonEnabled = false;
+  @override
+  void initState() {
+    super.initState();
+    controller.addListener(() {
+      setState(() {
+        isButtonEnabled = controller.text.isNotEmpty;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController controller = TextEditingController();
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Theme
@@ -38,14 +48,14 @@ class _JoinScreen extends State<JoinScreen> {
               const SizedBox(height: 40),
               ElevatedButton(
                 child: const Text("Join"),
-                onPressed: () async {
+                onPressed: isButtonEnabled?() async {
                   UserModel userModel = await UserModel.add(name: controller.text);
                   Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (BuildContext context) =>
                               UserListScreen(myUserModel: userModel)));
-                },
+                }:null,
               ),
             ],
           ),

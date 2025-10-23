@@ -17,6 +17,7 @@ void main() async{
   await Supabase.initialize(
     url: baseUrl,
     anonKey: anonKey,
+    postgrestOptions: const PostgrestClientOptions(schema: 'webrtc'),
   );
   runApp(const MyApp());
 }
